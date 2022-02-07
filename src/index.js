@@ -5,7 +5,7 @@ import './index.css';
 class KeyboardButton extends React.Component {
     render() {
         return (
-            <button className={this.props.selected ? 'selected' : ''}>
+            <button className={this.props.isSelected ? 'selected' : ''} onClick={() => this.props.onClick()}>
                 {this.props.label}
             </button>
         );
@@ -27,7 +27,14 @@ class Keyboard extends React.Component {
                         return <div key={'row-' + index}>
                             {
                                 row.map((letter) => {
-                                    return <KeyboardButton key={letter} label={letter} selected={letter == this.props.answerLetter} />
+                                    return (
+                                        <KeyboardButton 
+                                            key={letter}
+                                            label={letter} 
+                                            isSelected={letter == this.props.answerLetter} 
+                                            onClick={() => this.props.onLetterClick(letter)}
+                                            />
+                                    );
                                 })
                             }
                         </div>
@@ -54,7 +61,7 @@ class Wheel extends React.Component {
             <div>
                 {
                     lettersCopy.map((letter, index) => {
-                        return <Segment key={letter ?? '*'} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} />
+                        return <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} />
                     })
                 }
             </div>            
@@ -72,6 +79,12 @@ class Game extends React.Component {
         };
     }
 
+    handleLetterClick (letter) {
+        this.setState({
+            answerLetter: letter
+        });
+    }
+
     render () {
         return (
             <div>
@@ -80,7 +93,7 @@ class Game extends React.Component {
                     answerPosition={this.state.answerPosition}
                     answerLetter={this.state.answerLetter}
                 />
-                <Keyboard answerLetter={this.state.answerLetter} />
+                <Keyboard answerLetter={this.state.answerLetter} onLetterClick={(letter) => this.handleLetterClick(letter)} />
             </div>
         );
     }
