@@ -4,7 +4,11 @@ import './index.css';
 
 class KeyboardButton extends React.Component {
     render() {
-        return <button>{this.props.label}</button>
+        return (
+            <button className={this.props.selected ? 'selected' : ''}>
+                {this.props.label}
+            </button>
+        );
     }
 }
 
@@ -23,7 +27,7 @@ class Keyboard extends React.Component {
                         return <div key={'row-' + index}>
                             {
                                 row.map((letter) => {
-                                    return <KeyboardButton key={letter} label={letter} />
+                                    return <KeyboardButton key={letter} label={letter} selected={letter == this.props.answerLetter} />
                                 })
                             }
                         </div>
@@ -37,32 +41,46 @@ class Keyboard extends React.Component {
 
 class Segment extends React.Component {
     render () {
-        return <div>{this.props.letter}</div>;
+        return <div className={this.props.isAnswerLetter ? 'answer-letter' : ''}>{this.props.letter}</div>;
     }
 }
 
 class Wheel extends React.Component {
     render () {
+        const lettersCopy = this.props.letters.slice();
+        lettersCopy.splice(this.props.answerPosition, 0, this.props.answerLetter);
+
         return (
             <div>
-                <Segment letter={'T'} />
-                <Segment letter={'C'} />
-                <Segment letter={'O'} />
-                <Segment letter={'M'} />
-                <Segment letter={'P'} />
-                <Segment letter={'L'} />
-                <Segment letter={'E'} />
+                {
+                    lettersCopy.map((letter, index) => {
+                        return <Segment key={letter ?? '*'} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} />
+                    })
+                }
             </div>            
         );
     }
 }
 
 class Game extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            letters : ['T','C','O','M','P','L','E'],
+            answerLetter : 'A',
+            answerPosition : 0,
+        };
+    }
+
     render () {
         return (
             <div>
-                <Wheel />
-                <Keyboard />
+                <Wheel 
+                    letters={this.state.letters}
+                    answerPosition={this.state.answerPosition}
+                    answerLetter={this.state.answerLetter}
+                />
+                <Keyboard answerLetter={this.state.answerLetter} />
             </div>
         );
     }
