@@ -12,13 +12,22 @@ class KeyboardButton extends React.Component {
     }
 }
 
+class RotateButton extends React.Component {
+    render() {
+        return (
+            <button onClick={() => this.props.onClick()}>
+                {this.props.label}
+            </button>
+        );
+    }
+}
+
 class Keyboard extends React.Component {
     render () {
         const keyboardLabels = [
             ['Q','W','E','R','T','Y','U','I','O','P'],
             ['A','S','D','F','G','H','J','K','L'],
-            ['↶','Z','X','C','V','B','N','M','↷'],
-            ['SUBMIT']
+            ['Z','X','C','V','B','N','M']
         ];
         return (
             <div>
@@ -33,14 +42,26 @@ class Keyboard extends React.Component {
                                             label={letter} 
                                             isSelected={letter == this.props.answerLetter} 
                                             onClick={() => this.props.onLetterClick(letter)}
-                                            />
+                                        />
                                     );
                                 })
                             }
                         </div>
                     })
                 }
-                
+                <div>
+                    <button onClick={() => this.props.onRotateClicked(false)}>
+                        {'↶'}
+                    </button>
+                    <button 
+                        // onClick={() => this.props.onClick()}
+                        >
+                        {'SUBMIT'}
+                    </button>
+                    <button onClick={() => this.props.onRotateClicked(true)}>
+                        {'↷'}
+                    </button>
+                </div>
             </div>        
         );
     }
@@ -85,6 +106,19 @@ class Game extends React.Component {
         });
     }
 
+    handleRotateLetter(rotateClockwise) {
+        let newAnswerPosition = rotateClockwise ? this.state.answerPosition + 1 : this.state.answerPosition - 1;
+        if (newAnswerPosition < 0) {
+            newAnswerPosition = this.state.letters.length;
+        } else {
+            newAnswerPosition %= this.state.letters.length + 1;
+        }
+        
+        this.setState({
+            answerPosition: newAnswerPosition
+        });
+    }
+
     render () {
         return (
             <div>
@@ -93,7 +127,11 @@ class Game extends React.Component {
                     answerPosition={this.state.answerPosition}
                     answerLetter={this.state.answerLetter}
                 />
-                <Keyboard answerLetter={this.state.answerLetter} onLetterClick={(letter) => this.handleLetterClick(letter)} />
+                <Keyboard 
+                    answerLetter={this.state.answerLetter} 
+                    onLetterClick={(letter) => this.handleLetterClick(letter)} 
+                    onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
+                />
             </div>
         );
     }
