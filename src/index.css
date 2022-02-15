@@ -5,3 +5,35 @@
 button.selected {
     color: red;
 }
+
+.wheel {
+    position: relative;
+    width: 256px; /* twice the size of the translate */
+    height: 256px;
+    padding: 64px; /* Distance between circle and wheel */
+    border: dashed 1px;
+    border-radius: 50%;
+    margin: 28px auto;
+}
+.letter {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    background-color: azure;
+    top: 50%; /* moves the center of the circle from the top */
+    left: 50%; /* moves the center of the circle from the left */
+    width: 64px;
+    height: 64px;
+    margin: -32px;
+    /* 2em = 4em/2 */
+    /* half the width */
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 40px;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

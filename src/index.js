@@ -30,7 +30,7 @@ class Keyboard extends React.Component {
             ['Z','X','C','V','B','N','M']
         ];
         return (
-            <div>
+            <div className={'keyboard'}>
                 {
                     keyboardLabels.map((row, index) => {
                         return <div key={'row-' + index}>
@@ -68,21 +68,33 @@ class Keyboard extends React.Component {
 }
 
 class Segment extends React.Component {
+
     render () {
-        return <div className={this.props.isAnswerLetter ? 'answer-letter' : ''}>{this.props.letter}</div>;
+        const divStyle = {
+            transform: 'rotate(' + this.props.displayAngle + 'deg) translate(128px) rotate(-' + this.props.displayAngle + 'deg)'
+          };
+        return (
+            <div className={'letter ' + (this.props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle}>
+                {this.props.letter}
+            </div>
+        );;
     }
 }
 
 class Wheel extends React.Component {
+
     render () {
-        const lettersCopy = this.props.letters.slice();
-        lettersCopy.splice(this.props.answerPosition, 0, this.props.answerLetter);
+        const numberOfSegments = this.props.letters.length;
+        const degreeAngle = 360 / numberOfSegments;
+        let currentAngle = 0;
 
         return (
-            <div>
+            <div className={'wheel'}>
                 {
-                    lettersCopy.map((letter, index) => {
-                        return <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} />
+                    this.props.letters.map((letter, index) => {
+                        const currentSegment = <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} displayAngle={currentAngle} />
+                        currentAngle = currentAngle + degreeAngle;
+                        return currentSegment;
                     })
                 }
             </div>            
@@ -120,12 +132,14 @@ class Game extends React.Component {
     }
 
     render () {
+        const lettersCopy = this.state.letters.slice();
+        lettersCopy.splice(this.state.answerPosition, 0, this.state.answerLetter);
+
         return (
             <div>
                 <Wheel 
-                    letters={this.state.letters}
+                    letters={lettersCopy}
                     answerPosition={this.state.answerPosition}
-                    answerLetter={this.state.answerLetter}
                 />
                 <Keyboard 
                     answerLetter={this.state.answerLetter} 
