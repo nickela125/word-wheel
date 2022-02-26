@@ -11,7 +11,7 @@ button.selected {
     width: 256px; /* twice the size of the translate */
     height: 256px;
     padding: 64px; /* Distance between circle and wheel */
-    border: dashed 1px;
+    border: solid 10px cornflowerblue;
     border-radius: 50%;
     margin: 28px auto;
 }
@@ -19,21 +19,63 @@ button.selected {
     display: block;
     overflow: hidden;
     position: absolute;
-    background-color: azure;
+    /* background-color: azure; */
     top: 50%; /* moves the center of the circle from the top */
     left: 50%; /* moves the center of the circle from the left */
     width: 64px;
-    height: 64px;
-    margin: -32px;
+    /* height: 64px; */
+    margin: -26px -32px; /* half of width to put perfectly in the middle of the circle */
     /* 2em = 4em/2 */
     /* half the width */
     font-family: sans-serif;
     text-align: center;
-    font-size: 40px;
+    font-size: 45px;
 }
 
 .keyboard {
+    max-width: 500px;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
+
+.keyboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.keyboard-button {
+    width: 10%;
+    margin: 4px;
+    height: 50px;
+    border-radius: 4px;
+}
+
+.keyboard-row:nth-child(2) {
+    padding: 0 25px;
+}
+
+.keyboard-row:nth-child(3) {
+    padding: 0 40px;
+}
+
+.keyboard-row:nth-child(4) {
+    padding: 0 35px;
+}
+
+.keyboard-row:nth-child(4) button:nth-child(1), 
+.keyboard-row:nth-child(4) button:nth-child(3) {
+    flex-grow: 1;
+}
+
+.keyboard-row:nth-child(4) button:nth-child(2) {
+    flex-grow: 6;
+}
+
+/*
+
+(24 + x) * 10 = 500, 24 + x = 50, x = 26, (26+24)/500 = 0.1
+50/450 = 
+*/

@@ -6,7 +6,7 @@ require('seedrandom')
 class KeyboardButton extends React.Component {
     render() {
         return (
-            <button className={this.props.isSelected ? 'selected' : ''} onClick={() => this.props.onClick()}>
+            <button className={(this.props.isSelected ? 'selected' : '') + ' keyboard-button'} onClick={() => this.props.onClick()}>
                 {this.props.label}
             </button>
         );
@@ -34,7 +34,7 @@ class Keyboard extends React.Component {
             <div className={'keyboard'}>
                 {
                     keyboardLabels.map((row, index) => {
-                        return <div key={'row-' + index}>
+                        return <div key={'row-' + index} className='keyboard-row'>
                             {
                                 row.map((letter) => {
                                     return (
@@ -50,14 +50,14 @@ class Keyboard extends React.Component {
                         </div>
                     })
                 }
-                <div>
-                    <button onClick={() => this.props.onRotateClicked(false)}>
+                <div className='keyboard-row'>
+                    <button className='keyboard-button' onClick={() => this.props.onRotateClicked(false)}>
                         {'↶'}
                     </button>
-                    <button onClick={() => this.props.onSubmitClicked()}>
+                    <button className='keyboard-button' onClick={() => this.props.onSubmitClicked()}>
                         {'SUBMIT'}
                     </button>
-                    <button onClick={() => this.props.onRotateClicked(true)}>
+                    <button className='keyboard-button' onClick={() => this.props.onRotateClicked(true)}>
                         {'↷'}
                     </button>
                 </div>
