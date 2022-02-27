@@ -6,15 +6,26 @@ button.selected {
     color: red;
 }
 
-.wheel {
+/* .wheel {
     position: relative;
-    width: 256px; /* twice the size of the translate */
-    height: 256px;
-    padding: 64px; /* Distance between circle and wheel */
-    border: solid 10px cornflowerblue;
+    width: 256px;*/ /* twice the size of the translate */
+    /* height: 256px;
+    padding: 64px; */ /* Distance between circle and wheel */
+    /*border: solid 10px cornflowerblue;
     border-radius: 50%;
     margin: 28px auto;
+} */
+
+.wheel {
+    border: solid 3px cadetblue;
+    border-radius: 50%;
+    max-width: 50vh;
+    margin: 5vh auto;
+    width: 70vw;
+    height: 70vw;
+    max-height: 50vh;
 }
+
 .letter {
     display: block;
     overflow: hidden;
