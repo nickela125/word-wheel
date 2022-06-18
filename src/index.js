@@ -70,7 +70,7 @@ class Segment extends React.Component {
 
     render () {
         const divStyle = {
-            transform: 'rotate(' + this.props.displayAngle + 'deg) translate(128px) rotate(-' + this.props.displayAngle + 'deg)'
+            transform: 'rotate(' + this.props.displayAngle + 'deg) translate(20vh) rotate(-' + this.props.displayAngle + 'deg)'
           };
         return (
             <div className={'letter ' + (this.props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle}>
@@ -85,18 +85,21 @@ class Wheel extends React.Component {
     render () {
         const numberOfSegments = this.props.letters.length;
         const degreeAngle = 360 / numberOfSegments;
-        let currentAngle = 0;
+        let currentAngle = 43;
 
         return (
-            <div className={'wheel'}>
-                {
-                    this.props.letters.map((letter, index) => {
-                        const currentSegment = <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} displayAngle={currentAngle} />
-                        currentAngle = currentAngle + degreeAngle;
-                        return currentSegment;
-                    })
-                }
-            </div>            
+            <div className='wheel-container'>
+                <div className={'wheel'}>
+                    <div className={'wheel-inner'} />
+                    {
+                        this.props.letters.map((letter, index) => {
+                            const currentSegment = <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} displayAngle={currentAngle} />
+                            currentAngle = currentAngle + degreeAngle;
+                            return currentSegment;
+                        })
+                    }
+                </div>    
+            </div>        
         );
     }
 }
@@ -200,7 +203,7 @@ class Game extends React.Component {
         }        
 
         return (
-            <div>
+            <div className='parent-container'>
                 <Wheel 
                     letters={lettersCopy}
                     answerPosition={this.state.answerGuessPosition}

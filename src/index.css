@@ -6,6 +6,15 @@ button.selected {
     color: red;
 }
 
+.wheel-container {
+    margin: 5vh auto;
+    padding: 5vh;
+    border: solid 3px cadetblue;
+    border-radius: 50%;
+    width: 50vh;
+    height: 50vh;
+}
+
 /* .wheel {
     position: relative;
     width: 256px;*/ /* twice the size of the translate */
@@ -16,7 +25,7 @@ button.selected {
     margin: 28px auto;
 } */
 
-.wheel {
+/* .wheel {
     border: solid 3px cadetblue;
     border-radius: 50%;
     max-width: 50vh;
@@ -26,21 +35,53 @@ button.selected {
     max-height: 50vh;
 }
 
-.letter {
+.wheel-inner {
+    width: 5vw;
+    height: 5vw;
+    border: solid 3px cadetblue;
+    border-radius: 50%;
+} */
+
+.wheel {
+    /* border: solid 3px cadetblue;
+    border-radius: 50%; */
+    display: block;
+    position: relative;
+    height: 50vh;
+    width: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* https://jsfiddle.net/t9ugqx3b/3/ */
+
+/* .letter {
     display: block;
     overflow: hidden;
     position: absolute;
     /* background-color: azure; */
-    top: 50%; /* moves the center of the circle from the top */
-    left: 50%; /* moves the center of the circle from the left */
-    width: 64px;
+    /* top: 50%; moves the center of the circle from the top */
+    /* left: 50%; moves the center of the circle from the left */
+    /* width: 64px; */
     /* height: 64px; */
-    margin: -26px -32px; /* half of width to put perfectly in the middle of the circle */
+    /* margin: -26px -32px; half of width to put perfectly in the middle of the circle */
     /* 2em = 4em/2 */
     /* half the width */
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
+    /* text-align: center; */
+    /* font-size: 45px; */
+/* }  */
+
+.letter {
+    font-size: 10vh;
     text-align: center;
-    font-size: 45px;
+    top: 50%;
+    left: 50%;
+    display: block;
+    position: absolute;
+    width: 10vh;
+    height: 10vh;
+    margin: -5vh -5vh; /* half width to make it align in the center of the circle (before transforming) */
 }
 
 .keyboard {
