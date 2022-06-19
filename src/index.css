@@ -6,45 +6,22 @@ button.selected {
     color: red;
 }
 
-.wheel-container {
-    margin: 5vh auto;
-    padding: 5vh;
-    border: solid 3px cadetblue;
-    border-radius: 50%;
+#wheel-container {
     width: 50vh;
     height: 50vh;
+    margin: 0 auto;
 }
 
-/* .wheel {
-    position: relative;
-    width: 256px;*/ /* twice the size of the translate */
-    /* height: 256px;
-    padding: 64px; */ /* Distance between circle and wheel */
-    /*border: solid 10px cornflowerblue;
-    border-radius: 50%;
-    margin: 28px auto;
-} */
-
-/* .wheel {
+.wheel {
     border: solid 3px cadetblue;
     border-radius: 50%;
-    max-width: 50vh;
-    margin: 5vh auto;
-    width: 70vw;
-    height: 70vw;
-    max-height: 50vh;
+    position: relative;
+    height: 95%;
+    width: 95%;
+    margin: 0 auto;
 }
 
 .wheel-inner {
-    width: 5vw;
-    height: 5vw;
-    border: solid 3px cadetblue;
-    border-radius: 50%;
-} */
-
-.wheel {
-    /* border: solid 3px cadetblue;
-    border-radius: 50%; */
     display: block;
     position: relative;
     height: 50vh;
@@ -55,33 +32,16 @@ button.selected {
 
 /* https://jsfiddle.net/t9ugqx3b/3/ */
 
-/* .letter {
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    /* background-color: azure; */
-    /* top: 50%; moves the center of the circle from the top */
-    /* left: 50%; moves the center of the circle from the left */
-    /* width: 64px; */
-    /* height: 64px; */
-    /* margin: -26px -32px; half of width to put perfectly in the middle of the circle */
-    /* 2em = 4em/2 */
-    /* half the width */
-    /* font-family: sans-serif; */
-    /* text-align: center; */
-    /* font-size: 45px; */
-/* }  */
-
 .letter {
-    font-size: 10vh;
+    font-size: 6vh; /* magic number to make it scale properly */
     text-align: center;
     top: 50%;
     left: 50%;
     display: block;
     position: absolute;
-    width: 10vh;
-    height: 10vh;
-    margin: -5vh -5vh; /* half width to make it align in the center of the circle (before transforming) */
+    width: 14%;
+    height: 14%;
+    margin: -7% -7%; /* half width to make it align in the center of the circle (before transforming) */
 }
 
 .keyboard {
@@ -126,8 +86,9 @@ button.selected {
     flex-grow: 6;
 }
 
-/*
-
-(24 + x) * 10 = 500, 24 + x = 50, x = 26, (26+24)/500 = 0.1
-50/450 = 
-*/
+#keyboard-container {
+    background-color: lightseagreen;
+    width: 48vh;
+    height: 40vh;
+    margin: 0 auto;
+}
