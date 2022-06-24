@@ -75,9 +75,12 @@ class Segment extends React.Component {
             transform: 'rotate(' + this.props.displayAngle + 'deg) translate(250%) rotate(-' + this.props.displayAngle + 'deg)'
           };
         return (
-            <div className={'letter ' + (this.props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle}>
-                {this.props.letter}
-            </div>
+            <>
+                <div className={'letter ' + (this.props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle}>
+                    {this.props.letter}
+                </div>
+                <div className={'divider'} style={{transform: 'rotate('+ this.props.dividerAngle + 'deg)'}} />
+            </>
         );;
     }
 }
@@ -87,19 +90,30 @@ class Wheel extends React.Component {
     render () {
         const numberOfSegments = this.props.letters.length;
         const degreeAngle = 360 / numberOfSegments;
-        let currentAngle = 43;
+        let currentAngle = 43; // random number so it looks randomly distributed throught the circle
 
         return (
             <div id='wheel-container'>
                 <div className={'wheel'}>
-                    <div className={'wheel-inner'} />
+                    <div id={'center-circle'} />
+                    {
+                        <>
+                        </>
+                    }
+                    <div className={'wheel-inner'} >
                     {
                         this.props.letters.map((letter, index) => {
-                            const currentSegment = <Segment key={index} letter={letter ?? '*'} isAnswerLetter={index == this.props.answerPosition} displayAngle={currentAngle} />
+                            const dividerAngle = 180 + currentAngle + (degreeAngle/2);
+                            const currentSegment = <Segment key={index} 
+                                                            letter={letter ?? '*'} 
+                                                            isAnswerLetter={index == this.props.answerPosition}
+                                                            displayAngle={currentAngle}
+                                                            dividerAngle={dividerAngle} />
                             currentAngle = currentAngle + degreeAngle;
                             return currentSegment;
                         })
                     }
+                    </div>
                 </div>    
             </div>        
         );
@@ -183,6 +197,9 @@ class Game extends React.Component {
             newAnswerPosition = this.state.letters.length;
         } else {
             newAnswerPosition %= this.state.letters.length + 1;
+        }
+        if (rotateClockwise && newAnswerPosition === 0) {
+            newAnswerPosition = 1; // because being last and being first is the same
         }
         
         this.setState({

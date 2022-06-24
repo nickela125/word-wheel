@@ -21,13 +21,14 @@ button.selected {
     margin: 0 auto;
 }
 
-.wheel-inner {
+.divider {
+    transform-origin: top right;
+    height: 3px;
+    background-color: cadetblue;
+    position: absolute;
+    top: 50%;
     display: block;
-    position: relative;
-    height: 50vh;
-    width: 50vh;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
 }
 
 /* https://jsfiddle.net/t9ugqx3b/3/ */
@@ -42,6 +43,18 @@ button.selected {
     width: 14%;
     height: 14%;
     margin: -7% -7%; /* half width to make it align in the center of the circle (before transforming) */
+}
+
+#center-circle {
+    border: solid 3px cadetblue;
+    background-color: cadetblue;
+    position: relative;
+    border-radius: 50%;
+    width: 10%;
+    height: 10%;
+    top: 50%;
+    left: 50%;
+    margin: -5%;
 }
 
 .keyboard {
