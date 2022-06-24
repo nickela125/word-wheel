@@ -199,7 +199,7 @@ class Game extends React.Component {
             newAnswerPosition %= this.state.letters.length + 1;
         }
         if (rotateClockwise && newAnswerPosition === 0) {
-            newAnswerPosition = 1; // because being last and being first is the same
+            newAnswerPosition = 1; // because being last and being first is the same TODO fix this
         }
         
         this.setState({
@@ -223,6 +223,7 @@ class Game extends React.Component {
 
         return (
             <div className='parent-container'>
+                <h1>Word Wheeldle</h1>
                 <Wheel 
                     letters={lettersCopy}
                     answerPosition={this.state.answerGuessPosition}
