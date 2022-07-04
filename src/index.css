@@ -1,9 +1,9 @@
 .answer-letter {
-    color: red;
+    color: #ffa735;
 }
 
 button.selected {
-    color: red;
+    color: #ffa735;
 }
 
 body {
@@ -11,14 +11,25 @@ body {
 }
 
 h1 {
-    height: 3vh;
-    margin: 2vh 0 0 3vw;
+    margin: 2vh 50% 0 10%;
+    display: inline;
+    font-size: 5vh;
+}
+
+.help-button {
+    border-radius: 50%;
+    border-style: none;
+    height: 4vh;
+    width: 4vh;
+    font-size: 2.5vh;
+    margin: 0 0 0 2vh;
+    vertical-align: text-bottom;
 }
 
 #wheel-container {
     width: 45vh;
     height: 45vh;
-    margin: 5vh auto 3vh auto;
+    margin: 2vh auto 3vh auto;
 }
 
 .wheel {
@@ -84,9 +95,10 @@ h1 {
     width: 8%;
     margin: 1%;
     padding: 0;
-    font-size: 3vh;
     font-size: 4vh;
     font-family: monospace;
+    border-style: none;
+    border-radius: 5px;
 }
 
 .keyboard-row:nth-child(2) {
@@ -96,6 +108,7 @@ h1 {
 .keyboard-row:nth-child(4) button:nth-child(1), 
 .keyboard-row:nth-child(4) button:nth-child(3) {
     flex-grow: 1;
+    font-size: 6vh;
 }
 
 .keyboard-row:nth-child(4) button:nth-child(2) {
