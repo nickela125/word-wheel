@@ -8,7 +8,7 @@ export default function Keyboard(props) {
         ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
     ];
     return (
-        <div id='keyboard-container'>
+        <div id='keyboard-container' data-testid={'keyboard'}>
             <div className={'keyboard'}>
                 {
                     keyboardLabels.map((row, index) => {

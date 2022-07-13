@@ -6,7 +6,7 @@ export default function Wheel(props) {
     let currentAngle = 43; // random number so it looks randomly distributed throught the circle
 
     return (
-        <div id='wheel-container'>
+        <div id={'wheel-container'} data-testid={'wheel'}>
             <div className={'wheel'}>
                 <div id={'center-circle'} />
                 <div className={'wheel-inner'} >

@@ -4,7 +4,7 @@ export default function Segment (props) {
         };
     return (
         <>
-            <div className={'letter ' + (props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle}>
+            <div className={'letter ' + (props.isAnswerLetter ? 'answer-letter' : '')} style={divStyle} data-testid={'letter'}>
                 {props.letter}
             </div>
             <div className={'divider'} style={{transform: 'rotate('+ props.dividerAngle + 'deg)'}} />

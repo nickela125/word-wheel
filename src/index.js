@@ -1,7 +1,10 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Game from './Components/Game';
 import './index.css';
-require('seedrandom')
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<Game />);
 
 /* TODO List
     - Fix rotate algorithm
@@ -17,8 +20,3 @@ require('seedrandom')
     - Check that random is working correctly
     - Come up with words
 */
-
-ReactDOM.render(
-    <Game />,
-    document.getElementById('root')
-);

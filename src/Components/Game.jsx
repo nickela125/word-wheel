@@ -1,5 +1,6 @@
 import React from 'react';
 import Keyboard from './Keyboard';
+import getRandomNumberGenerator from './GameRandom';
 import Wheel from './Wheel';
 
 export default class Game extends React.Component {
@@ -16,13 +17,13 @@ export default class Game extends React.Component {
         return 'COMPLETE';
     }
 
+    
     generateGame(answerWord) {
         const numberOfLetters = answerWord.length;
-        const randomNumberGenerator = this.getRandomNumberGenerator();
-        const indexOfLetterToStartWith = Math.floor(randomNumberGenerator() * (numberOfLetters));
+        const randomNumberGenerator = getRandomNumberGenerator();
+        const indexOfLetterToStartWith = Math.floor(randomNumberGenerator() * (numberOfLetters - 1));
         const indexOfLetterToRemove = Math.floor(randomNumberGenerator() * (numberOfLetters));
 
-        //const rotatedArray = this.createRotatedLetterArray(answerWord, 0);
         const letterArray = answerWord.split('');
 
         const answerLetter = letterArray[indexOfLetterToRemove];
@@ -68,16 +69,6 @@ export default class Game extends React.Component {
         return rotatedLetters;
     }
 
-    getRandomNumberGenerator() {
-        // Make sure everyone gets the same randoms value every day
-        const seedrandom = require('seedrandom');
-
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        return seedrandom(today.getTime());
-    }
-
     handleLetterClick(letter) {
         this.setState({
             answerGuess: letter,
@@ -88,7 +79,6 @@ export default class Game extends React.Component {
     handleRotateLetter(rotateClockwise) {
         let newGuessPosition = rotateClockwise ? this.state.answerGuessPosition + 1 : this.state.answerGuessPosition - 1;
         const newLetterArray = this.state.letters.slice();
-        let newAnswerPosition = this.state.newGuessPosition;
 
         if (newGuessPosition < 0) {
             newGuessPosition = this.state.letters.length;
@@ -96,16 +86,13 @@ export default class Game extends React.Component {
             // Move last letter to the start to make the rotate smooth 
             const lastLetter = newLetterArray.pop();
             newLetterArray.unshift(lastLetter);
-            newAnswerPosition--;
 
         } else if (newGuessPosition === this.state.letters.length + 1) {
-            newGuessPosition = 0;
+            newGuessPosition = 1;
 
             // Move first letter to the end to make the rotate smooth
             const firstLetter = newLetterArray.shift();
             newLetterArray.push(firstLetter);
-            newAnswerPosition++;
-            //newAnswerPosition %= 
         }
 
         this.setState({
@@ -115,7 +102,7 @@ export default class Game extends React.Component {
     }
 
     checkAnswer() {
-        const correctAnswer = this.state.answerGuessPosition === this.state.answerPosition &&
+        const correctAnswer = ((this.state.answerGuessPosition % 7) + this.state.startingIndex) === this.state.answerPosition &&
             this.state.answerGuess === this.state.answerLetter;
         this.setState({
             hasWon: correctAnswer,
