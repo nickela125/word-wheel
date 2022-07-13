@@ -1,7 +1,7 @@
 import React from 'react';
 import Keyboard from './Keyboard';
-import getRandomNumberGenerator from './GameRandom';
 import Wheel from './Wheel';
+import getRandomNumberGenerator from './GameRandom';
 
 export default class Game extends React.Component {
     constructor(props) {
