@@ -6,4 +6,4 @@ export default function getRandomNumberGenerator() {
     today.setHours(0, 0, 0, 0);
 
     return seedrandom(today.getTime());
-}
+};

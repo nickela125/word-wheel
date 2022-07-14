@@ -17,24 +17,25 @@ export default class Game extends React.Component {
         return 'COMPLETE';
     }
 
-    
+
     generateGame(answerWord) {
         const numberOfLetters = answerWord.length;
-        const randomNumberGenerator = getRandomNumberGenerator();
-        const indexOfLetterToStartWith = Math.floor(randomNumberGenerator() * (numberOfLetters - 1));
-        const indexOfLetterToRemove = Math.floor(randomNumberGenerator() * (numberOfLetters));
-
         const letterArray = answerWord.split('');
+        const randomNumberGenerator = getRandomNumberGenerator();
 
+        const indexOfLetterToRemove = Math.floor(randomNumberGenerator() * (numberOfLetters - 1));
         const answerLetter = letterArray[indexOfLetterToRemove];
-
         const arrayWithoutAnswerLetter = this.removeLetterAtIndex(letterArray, indexOfLetterToRemove);
 
+        const indexOfStartOfWord = Math.floor(randomNumberGenerator() * (arrayWithoutAnswerLetter.length - 1));
+
+        const rotatedArray = this.createRotatedArray(arrayWithoutAnswerLetter, indexOfStartOfWord);
+
         return {
-            letters: arrayWithoutAnswerLetter,
+            letters: rotatedArray,
             answerLetter: answerLetter,
             answerPosition: indexOfLetterToRemove,
-            startingIndex: indexOfLetterToStartWith
+            startingIndex: indexOfStartOfWord
         };
     }
 
@@ -58,11 +59,16 @@ export default class Game extends React.Component {
         return rotatedLetters;
     }
 
-    createRotatedArray(originalArray, indexToRotateFrom) {
+    createRotatedArray(originalArray, indexToMoveStartTo) {
         const rotatedLetters = [];
 
+        // originalArray: ['C','O','M','P','L','E','E']
+        // indexToMoveStartTo: 2
+        // result: ['E','E','C','O','M','P','L']
+
+        const indexOfOriginalToStartWith = originalArray.length - indexToMoveStartTo;
         for (let i = 0; i < originalArray.length; i++) {
-            const currentLetter = (i + indexToRotateFrom) % originalArray.length;
+            const currentLetter = (i + indexOfOriginalToStartWith) % originalArray.length;
             rotatedLetters.push(originalArray[currentLetter]);
         }
 
@@ -70,34 +76,58 @@ export default class Game extends React.Component {
     }
 
     handleLetterClick(letter) {
+        // handle removing?
+        const lettersCopy = this.state.letters.slice();
+        if (this.state.answerGuess !== null){
+            lettersCopy[0] = letter;
+        } else {
+            lettersCopy.unshift(letter);
+        }
+        
         this.setState({
             answerGuess: letter,
             answerGuessPosition: 0,
+            letters: lettersCopy,
         });
     }
 
     handleRotateLetter(rotateClockwise) {
-        let newGuessPosition = rotateClockwise ? this.state.answerGuessPosition + 1 : this.state.answerGuessPosition - 1;
-        const newLetterArray = this.state.letters.slice();
-
-        if (newGuessPosition < 0) {
-            newGuessPosition = this.state.letters.length;
-
-            // Move last letter to the start to make the rotate smooth 
-            const lastLetter = newLetterArray.pop();
-            newLetterArray.unshift(lastLetter);
-
-        } else if (newGuessPosition === this.state.letters.length + 1) {
-            newGuessPosition = 1;
-
-            // Move first letter to the end to make the rotate smooth
-            const firstLetter = newLetterArray.shift();
-            newLetterArray.push(firstLetter);
+        if (this.state.answerGuessPosition === null) {
+            return;
         }
+
+        let newGuessPosition;
+        const lettersCopy = this.state.letters.slice();
+        lettersCopy.splice(this.state.answerGuessPosition, 1);
+
+        if (rotateClockwise) {
+            newGuessPosition = this.state.answerGuessPosition + 1;
+
+            if (newGuessPosition === this.state.letters.length) {
+                newGuessPosition = 0;
+                // Move first letter to the end to make the rotate smooth
+                const firstLetter = lettersCopy.shift();
+                lettersCopy.push(firstLetter);
+            }
+        }
+        else {
+            newGuessPosition = this.state.answerGuessPosition - 1;
+
+            if (newGuessPosition < 0) {
+                newGuessPosition = this.state.letters.length - 1;
+    
+                // Move last letter to the start to make the rotate smooth 
+                const lastLetter = lettersCopy.pop();
+                lettersCopy.unshift(lastLetter);
+    
+            } 
+        }
+
+        lettersCopy.splice(newGuessPosition, 0, this.state.answerGuess);
 
         this.setState({
             answerGuessPosition: newGuessPosition,
-            letters: newLetterArray,
+            letters: lettersCopy,
         });
     }
 
@@ -110,17 +140,12 @@ export default class Game extends React.Component {
     }
 
     render() {
-        const lettersCopy = this.createRotatedArray(this.state.letters.slice(), this.state.startingIndex);
-        if (this.state.answerGuess !== null && this.state.answerGuessPosition !== null) {
-            lettersCopy.splice(this.state.answerGuessPosition, 0, this.state.answerGuess);
-        }
-
         return (
             <div className='parent-container'>
                 <h1>Word Wheeldle</h1>
                 <button className={'help-button'}>?</button>
                 <Wheel
-                    letters={lettersCopy}
+                    letters={this.state.letters}
                     answerPosition={this.state.answerGuessPosition}
                 />
                 <Keyboard
