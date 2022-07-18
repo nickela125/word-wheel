@@ -15,7 +15,7 @@ export default function Wheel(props) {
                             const dividerAngle = 180 + currentAngle + (degreeAngle / 2);
                             const currentSegment = <Segment key={index}
                                 letter={letter ?? '*'}
-                                isAnswerLetter={index === props.answerPosition}
+                                isAnswerLetter={index === props.answerGuessPosition}
                                 displayAngle={currentAngle}
                                 dividerAngle={dividerAngle} />
                             currentAngle = currentAngle + degreeAngle;

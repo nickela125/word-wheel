@@ -17,7 +17,6 @@ export default class Game extends React.Component {
         return 'COMPLETE';
     }
 
-
     generateGame(answerWord) {
         const numberOfLetters = answerWord.length;
         const letterArray = answerWord.split('');
@@ -34,7 +33,7 @@ export default class Game extends React.Component {
         return {
             letters: rotatedArray,
             answerLetter: answerLetter,
-            answerPosition: indexOfLetterToRemove,
+            answerOffset: indexOfLetterToRemove,
             startingIndex: indexOfStartOfWord
         };
     }
@@ -59,12 +58,12 @@ export default class Game extends React.Component {
         return rotatedLetters;
     }
 
+    // Example:
+    // originalArray: ['C','O','M','P','L','E','E']
+    // indexToMoveStartTo: 2
+    // result: ['E','E','C','O','M','P','L']
     createRotatedArray(originalArray, indexToMoveStartTo) {
         const rotatedLetters = [];
-
-        // originalArray: ['C','O','M','P','L','E','E']
-        // indexToMoveStartTo: 2
-        // result: ['E','E','C','O','M','P','L']
 
         const indexOfOriginalToStartWith = originalArray.length - indexToMoveStartTo;
         for (let i = 0; i < originalArray.length; i++) {
@@ -76,17 +75,25 @@ export default class Game extends React.Component {
     }
 
     handleLetterClick(letter) {
-        // handle removing?
         const lettersCopy = this.state.letters.slice();
-        if (this.state.answerGuess !== null){
-            lettersCopy[0] = letter;
+        let newStartingIndex = this.state.startingIndex;
+        let newAnswerGuessPosition = this.state.answerGuessPosition;
+
+        if (this.state.answerGuess !== null) {
+            lettersCopy[newAnswerGuessPosition] = letter;
         } else {
             lettersCopy.unshift(letter);
+            newAnswerGuessPosition = 0;
+
+            if (this.state.startingIndex > 0) {
+                newStartingIndex++;
+            }
         }
-        
+
         this.setState({
             answerGuess: letter,
-            answerGuessPosition: 0,
+            answerGuessPosition: newAnswerGuessPosition,
+            startingIndex: newStartingIndex,
             letters: lettersCopy,
         });
     }
@@ -97,6 +104,7 @@ export default class Game extends React.Component {
         }
 
         let newGuessPosition;
+        let newStartingIndex = this.state.startingIndex;
         const lettersCopy = this.state.letters.slice();
         lettersCopy.splice(this.state.answerGuessPosition, 1);
 
@@ -109,18 +117,23 @@ export default class Game extends React.Component {
                 const firstLetter = lettersCopy.shift();
                 lettersCopy.push(firstLetter);
             }
+            if (this.state.startingIndex > 0 && newGuessPosition === this.state.startingIndex) {
+                newStartingIndex--;
+            }
         }
         else {
             newGuessPosition = this.state.answerGuessPosition - 1;
 
             if (newGuessPosition < 0) {
                 newGuessPosition = this.state.letters.length - 1;
-    
+
                 // Move last letter to the start to make the rotate smooth 
                 const lastLetter = lettersCopy.pop();
                 lettersCopy.unshift(lastLetter);
-    
-            } 
+            }
+            if (this.state.startingIndex > 0 && newGuessPosition === this.state.startingIndex) {
+                newStartingIndex++;
+            }
         }
 
         lettersCopy.splice(newGuessPosition, 0, this.state.answerGuess);
@@ -128,11 +141,12 @@ export default class Game extends React.Component {
         this.setState({
             answerGuessPosition: newGuessPosition,
             letters: lettersCopy,
+            startingIndex: newStartingIndex,
         });
     }
 
     checkAnswer() {
-        const correctAnswer = ((this.state.answerGuessPosition % 7) + this.state.startingIndex) === this.state.answerPosition &&
+        const correctAnswer = ((this.state.answerOffset + this.state.startingIndex) % this.state.letters.length) === this.state.answerGuessPosition &&
             this.state.answerGuess === this.state.answerLetter;
         this.setState({
             hasWon: correctAnswer,
@@ -146,7 +160,7 @@ export default class Game extends React.Component {
                 <button className={'help-button'}>?</button>
                 <Wheel
                     letters={this.state.letters}
-                    answerPosition={this.state.answerGuessPosition}
+                    answerGuessPosition={this.state.answerGuessPosition}
                 />
                 <Keyboard
                     answerLetter={this.state.answerGuess}
