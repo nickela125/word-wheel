@@ -19,7 +19,7 @@ beforeEach(() => {
 });
 
 test('shows the title, wheel and keyboard', () => {
-  const header = screen.getByText('Word Wheeldle');
+  const header = screen.getByText('Word Wheel');
   const wheelComponent = screen.getByTestId('wheel')
   const keyboardComponent = screen.getByTestId('keyboard');
 

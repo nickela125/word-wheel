@@ -156,8 +156,11 @@ export default class Game extends React.Component {
     render() {
         return (
             <div className='parent-container'>
-                <h1>Word Wheeldle</h1>
-                <button className={'help-button'}>?</button>
+                <div className='title-bar'>
+                    <h1>Word Wheel</h1>
+                    <button className={'help-button'}>?</button>
+                </div>
+
                 <Wheel
                     letters={this.state.letters}
                     answerGuessPosition={this.state.answerGuessPosition}
