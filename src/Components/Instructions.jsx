@@ -4,6 +4,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import HelpIcon from '@mui/icons-material/Help';
 
 export default class Instructions extends React.Component {
 
@@ -23,9 +25,16 @@ export default class Instructions extends React.Component {
         }
         return (
             <>
-                <Button id='help-button' variant="outlined" onClick={handleClickOpen}>
-                    ?
-                </Button>
+                <IconButton
+                    size="large"
+                    aria-label="help-button"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleClickOpen}
+                    color="inherit"
+                >
+                    <HelpIcon />
+                </IconButton>
                 <Dialog open={this.state.open} onClose={handleClose}>
                     <DialogTitle>Instructions</DialogTitle>
                     <DialogContent>
@@ -35,9 +44,6 @@ export default class Instructions extends React.Component {
                     </DialogContent>
                 </Dialog>
             </>
-
         );
-
-
     }
 };

@@ -1,8 +1,21 @@
 import React from 'react';
 import Keyboard from './Keyboard';
 import Wheel from './Wheel';
-import Instructions from './Instructions';
+import Title from './Title';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { teal } from '@mui/material/colors';
 import getRandomNumberGenerator from './GameRandom';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: teal[500],
+        },
+        secondary: {
+            main: '#1de9b6',
+        },
+    },
+});
 
 export default class Game extends React.Component {
     constructor(props) {
@@ -156,26 +169,24 @@ export default class Game extends React.Component {
 
     render() {
         return (
-            <div className='parent-container'>
-                <div className='title-bar'>
-                    <h1>Word Wheel</h1>
-                    <Instructions open={false} />
+            <ThemeProvider theme={theme}>
+                <div className='parent-container'>
+                    <Title />
+                    <Wheel
+                        letters={this.state.letters}
+                        answerGuessPosition={this.state.answerGuessPosition}
+                    />
+                    <Keyboard
+                        answerLetter={this.state.answerGuess}
+                        onLetterClick={(letter) => this.handleLetterClick(letter)}
+                        onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
+                        onSubmitClicked={() => this.checkAnswer()}
+                    />
+                    <div>
+                        {this.state.hasWon ? 'You are a winner!' : ''}
+                    </div>
                 </div>
-
-                <Wheel
-                    letters={this.state.letters}
-                    answerGuessPosition={this.state.answerGuessPosition}
-                />
-                <Keyboard
-                    answerLetter={this.state.answerGuess}
-                    onLetterClick={(letter) => this.handleLetterClick(letter)}
-                    onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
-                    onSubmitClicked={() => this.checkAnswer()}
-                />
-                <div>
-                    {this.state.hasWon ? 'You are a winner!' : ''}
-                </div>
-            </div>
+            </ThemeProvider>
         );
     }
 }

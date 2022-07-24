@@ -7,7 +7,6 @@ const root = createRoot(container);
 root.render(<Game />);
 
 /* TODO List
-    - Instructions
     - Winning message
     - Timer with time on winning message
     - Save results with cookies

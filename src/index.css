@@ -1,9 +1,9 @@
 .answer-letter {
-    color: #ffa735;
+    color: #ff9100;
 }
 
 button.selected {
-    color: #ffa735;
+    color: #ff9100;
 }
 
 body {
@@ -13,7 +13,7 @@ body {
 
 .title-bar {
     width: 100%;
-    border-bottom: 4px solid black;
+    /* border-bottom: 4px solid black; */
     position: relative;
 }
 
@@ -53,7 +53,7 @@ h1 {
 .divider {
     transform-origin: top right;
     height: 3px;
-    background-color: cadetblue;
+    background-color: #00897b;
     position: absolute;
     top: 50%;
     display: block;
@@ -75,8 +75,8 @@ h1 {
 }
 
 #center-circle {
-    border: solid 3px cadetblue;
-    background-color: cadetblue;
+    border: solid 3px #00897b;
+    background-color: #00897b;
     position: relative;
     border-radius: 50%;
     width: 10%;
