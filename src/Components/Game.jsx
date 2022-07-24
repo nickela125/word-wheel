@@ -1,6 +1,7 @@
 import React from 'react';
 import Keyboard from './Keyboard';
 import Wheel from './Wheel';
+import Instructions from './Instructions';
 import getRandomNumberGenerator from './GameRandom';
 
 export default class Game extends React.Component {
@@ -158,7 +159,7 @@ export default class Game extends React.Component {
             <div className='parent-container'>
                 <div className='title-bar'>
                     <h1>Word Wheel</h1>
-                    <button className={'help-button'}>?</button>
+                    <Instructions open={false} />
                 </div>
 
                 <Wheel

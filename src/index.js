@@ -9,10 +9,10 @@ root.render(<Game />);
 /* TODO List
     - Instructions
     - Winning message
-    - Colours for dark and light mode
     - Timer with time on winning message
     - Save results with cookies
     - Share results
     - Check that random is working correctly
     - Come up with words
+    - Colours for dark and light mode
 */
