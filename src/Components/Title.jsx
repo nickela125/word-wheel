@@ -9,8 +9,8 @@ export default function Title() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Toolbar >
+                    <Typography variant="h4" component="div" sx={{ flexGrow: 1, variant: 'h5' }} align='center'>
                         Word Wheel
                     </Typography>
                     <Instructions />

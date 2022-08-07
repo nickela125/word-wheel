@@ -1,14 +1,15 @@
 .answer-letter {
-    color: #ff9100;
+    color: #D25842;
 }
 
 button.selected {
-    color: #ff9100;
+    color: #D25842;
 }
 
 body {
     font-family: monospace;
     margin: 0 auto;
+    background-color: #F5F5F5;
 }
 
 .title-bar {
@@ -38,22 +39,22 @@ h1 {
 #wheel-container {
     width: 45vh;
     height: 45vh;
-    margin: 2vh auto 3vh auto;
+    margin: 5vh auto 3vh auto;
 }
 
 .wheel {
-    border: solid 3px cadetblue;
+    border: solid 14px #53BBD2;
     border-radius: 50%;
     position: relative;
-    height: 95%;
-    width: 95%;
+    height: 85%;
+    width: 85%;
     margin: 0 auto;
 }
 
 .divider {
     transform-origin: top right;
     height: 3px;
-    background-color: #00897b;
+    background-color: #53BBD2;
     position: absolute;
     top: 50%;
     display: block;
@@ -75,8 +76,8 @@ h1 {
 }
 
 #center-circle {
-    border: solid 3px #00897b;
-    background-color: #00897b;
+    border: solid 3px #53BBD2;
+    background-color: #53BBD2;
     position: relative;
     border-radius: 50%;
     width: 10%;
@@ -97,17 +98,19 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 24%;
+    height: 25%;
 }
 
 .keyboard-button {
     width: 8%;
     margin: 1%;
     padding: 0;
-    font-size: 4vh;
+    font-size: 3.5vh;
     font-family: monospace;
     border-style: none;
     border-radius: 5px;
+    color: black;
+    background-color: #d4d4d4;
 }
 
 .keyboard-row:nth-child(2) {
@@ -117,7 +120,7 @@ h1 {
 .keyboard-row:nth-child(4) button:nth-child(1), 
 .keyboard-row:nth-child(4) button:nth-child(3) {
     flex-grow: 1;
-    font-size: 6vh;
+    font-size: 5vh;
 }
 
 .keyboard-row:nth-child(4) button:nth-child(2) {
@@ -126,7 +129,11 @@ h1 {
 
 #keyboard-container {
     width: 95vw;
-    height: 35vh;
+    height: 30vh;
     margin: 0 auto;
     max-width: 500px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

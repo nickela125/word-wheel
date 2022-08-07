@@ -3,18 +3,22 @@ import Keyboard from './Keyboard';
 import Wheel from './Wheel';
 import Title from './Title';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { teal } from '@mui/material/colors';
 import getRandomNumberGenerator from './GameRandom';
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: teal[500],
+            main: '#18819D',
         },
         secondary: {
             main: '#1de9b6',
         },
     },
+    typography: {
+        fontFamily: [
+            'monospace'
+        ].join(','),
+    }
 });
 
 export default class Game extends React.Component {

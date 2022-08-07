@@ -14,4 +14,7 @@ root.render(<Game />);
     - Check that random is working correctly
     - Come up with words
     - Colours for dark and light mode
+    - Enable keyboard shortcuts
+    - typescript
+    - redux
 */
