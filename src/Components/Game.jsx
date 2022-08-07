@@ -2,6 +2,7 @@ import React from 'react';
 import Keyboard from './Keyboard';
 import Wheel from './Wheel';
 import Title from './Title';
+import WinningMessage from './WinningMessage'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import getRandomNumberGenerator from './GameRandom';
 
@@ -186,9 +187,7 @@ export default class Game extends React.Component {
                         onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
                         onSubmitClicked={() => this.checkAnswer()}
                     />
-                    <div>
-                        {this.state.hasWon ? 'You are a winner!' : ''}
-                    </div>
+                    <WinningMessage open={this.state.hasWon} />
                 </div>
             </ThemeProvider>
         );

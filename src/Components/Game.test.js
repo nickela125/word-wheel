@@ -321,11 +321,11 @@ function resetRandomNumbers(firstRandomNumber, secondRandomNumber) {
 }
 
 function winningMessageShows() {
-  const winningMessage = screen.queryByText('You are a winner!');
+  const winningMessage = screen.queryByText('Winner!');
   expect(winningMessage).toBeInTheDocument();
 }
 
 function winningMessageDoesNotShow() {
-  const winningMessage = screen.queryByText('You are a winner!');
+  const winningMessage = screen.queryByText('Winner!');
   expect(winningMessage).not.toBeInTheDocument();
 }

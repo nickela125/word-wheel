@@ -137,3 +137,7 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.fireworks {
+    height: 100px;
+}
