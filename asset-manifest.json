@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/word-wheel/static/css/main.eb554d0b.css",
+    "main.css": "/word-wheel/static/css/main.9a4f48d4.css",
     "main.js": "/word-wheel/static/js/main.23471eb1.js",
     "index.html": "/word-wheel/index.html",
-    "main.eb554d0b.css.map": "/word-wheel/static/css/main.eb554d0b.css.map",
+    "main.9a4f48d4.css.map": "/word-wheel/static/css/main.9a4f48d4.css.map",
     "main.23471eb1.js.map": "/word-wheel/static/js/main.23471eb1.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb554d0b.css",
+    "static/css/main.9a4f48d4.css",
     "static/js/main.23471eb1.js"
   ]
 }
