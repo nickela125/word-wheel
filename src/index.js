@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import Game from './Components/Game';
+import LogRocket from 'logrocket';
 import './index.css';
 
+LogRocket.init('diqttc/word-wheel');
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<Game />);

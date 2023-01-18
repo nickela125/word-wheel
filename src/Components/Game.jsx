@@ -5,6 +5,8 @@ import Title from './Title';
 import WinningMessage from './WinningMessage'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import getRandomNumberGenerator from './GameRandom';
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 
 const theme = createTheme({
     palette: {
@@ -174,22 +176,24 @@ export default class Game extends React.Component {
 
     render() {
         return (
-            <ThemeProvider theme={theme}>
-                <div className='parent-container'>
-                    <Title />
-                    <Wheel
-                        letters={this.state.letters}
-                        answerGuessPosition={this.state.answerGuessPosition}
-                    />
-                    <Keyboard
-                        answerLetter={this.state.answerGuess}
-                        onLetterClick={(letter) => this.handleLetterClick(letter)}
-                        onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
-                        onSubmitClicked={() => this.checkAnswer()}
-                    />
-                    <WinningMessage open={this.state.hasWon} />
-                </div>
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <div className='parent-container'>
+                        <Title />
+                        <Wheel
+                            letters={this.state.letters}
+                            answerGuessPosition={this.state.answerGuessPosition}
+                        />
+                        <Keyboard
+                            answerLetter={this.state.answerGuess}
+                            onLetterClick={(letter) => this.handleLetterClick(letter)}
+                            onRotateClicked={(rotateClockwise) => this.handleRotateLetter(rotateClockwise)}
+                            onSubmitClicked={() => this.checkAnswer()}
+                        />
+                        <WinningMessage open={this.state.hasWon} />
+                    </div>
+                </ThemeProvider>
+            </Provider>
         );
     }
 }

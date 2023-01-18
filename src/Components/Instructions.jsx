@@ -5,6 +5,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import HelpIcon from '@mui/icons-material/Help';
+import { useDispatch } from 'react-redux'
+import toggleOpen from '../slices/instructionsOpenSlice'
 
 export default class Instructions extends React.Component {
 
@@ -16,7 +18,10 @@ export default class Instructions extends React.Component {
     }
 
     render() {
+        const dispatch = useDispatch();
+
         const handleClickOpen = () => {
+            dispatch(toggleOpen())
             this.setState({ open: true });
         };
         const handleClose = () => {
